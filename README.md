@@ -58,12 +58,12 @@ input : few images
 
 <img width="300" height="160" src="./data/room/0001.jpg"></img>
 <img width="300" height="160" src="./data/room/0020.jpg"></img>
+<img width="300" height="160" src="./data/room/0027.jpg"></img>
+ ...
 
 output : trained_example.mp4
 
-<video width="600" height="320" controls>
-  <source src="./data/trained_example.mp4" type="video/mp4">
-</video>
+https://github.com/sabin5105/REAL/assets/50198431/e3ce1e64-8531-4430-9007-4fa3ce72cab7
 
 # Training Sequence
 
