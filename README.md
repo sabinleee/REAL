@@ -59,10 +59,10 @@ input : few images
 <img width="300" height="160" src="./data/room/0001.jpg"></img>
 <img width="300" height="160" src="./data/room/0020.jpg"></img>
 
-output : trained_example.mov
+output : trained_example.mp4
 
 <video width="600" height="320" controls>
-  <source src="./data/trained_example.mov" type="video/mp4">
+  <source src="./data/trained_example.mp4" type="video/mp4">
 </video>
 
 # Training Sequence
