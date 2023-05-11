@@ -3,6 +3,7 @@ import torch.nn as nn
 
 from typing import Optional, Tuple
 
+# My implementation of NeRF
 class NeRF(nn.Module):
   r"""
   Neural radiance fields module.

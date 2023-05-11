@@ -11,7 +11,7 @@ mse2psnr = lambda x : -10. * torch.log(x) / torch.log(torch.Tensor([10.]))
 to8b = lambda x : (255*np.clip(x,0,1)).astype(np.uint8)
 
 
-# Positional encoding (section 5.1)
+# Positional encoding
 class Embedder:
     def __init__(self, **kwargs):
         self.kwargs = kwargs
@@ -79,10 +79,10 @@ class NeRF(nn.Module):
         self.pts_linears = nn.ModuleList(
             [nn.Linear(input_ch, W)] + [nn.Linear(W, W) if i not in self.skips else nn.Linear(W + input_ch, W) for i in range(D-1)])
         
-        ### Implementation according to the official code release (https://github.com/bmild/nerf/blob/master/run_nerf_helpers.py#L104-L105)
+        # Implementation according to the official code release (https://github.com/bmild/nerf/blob/master/run_nerf_helpers.py#L104-L105)
         self.views_linears = nn.ModuleList([nn.Linear(input_ch_views + W, W//2)])
 
-        ### Implementation according to the paper
+        #  Implementation according to the paper
         # self.views_linears = nn.ModuleList(
         #     [nn.Linear(input_ch_views + W, W//2)] + [nn.Linear(W//2, W//2) for i in range(D//2)])
         
@@ -192,7 +192,7 @@ def ndc_rays(H, W, focal, near, rays_o, rays_d):
     return rays_o, rays_d
 
 
-# Hierarchical sampling (section 5.2)
+# Hierarchical sampling
 def sample_pdf(bins, weights, N_samples, det=False, pytest=False):
     # Get pdf
     weights = weights + 1e-5 # prevent nans
