@@ -11,12 +11,9 @@ from tqdm import tqdm, trange
 
 import matplotlib.pyplot as plt
 
-from nerf import *
+from nerf_helper import *
 
 from load_llff import load_llff_data
-from load_deepvoxels import load_dv_data
-from load_blender import load_blender_data
-from load_LINEMOD import load_LINEMOD_data
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -419,8 +416,8 @@ def render_rays(ray_batch,
 
 
 def config_parser():
-
     import configargparse
+    
     parser = configargparse.ArgumentParser()
     parser.add_argument('--config', is_config_file=True, 
                         help='config file path')
@@ -566,42 +563,42 @@ def train():
             far = 1.
         print('NEAR FAR', near, far)
 
-    elif args.dataset_type == 'blender':
-        images, poses, render_poses, hwf, i_split = load_blender_data(args.datadir, args.half_res, args.testskip)
-        print('Loaded blender', images.shape, render_poses.shape, hwf, args.datadir)
-        i_train, i_val, i_test = i_split
+    # elif args.dataset_type == 'blender':
+    #     images, poses, render_poses, hwf, i_split = load_blender_data(args.datadir, args.half_res, args.testskip)
+    #     print('Loaded blender', images.shape, render_poses.shape, hwf, args.datadir)
+    #     i_train, i_val, i_test = i_split
 
-        near = 2.
-        far = 6.
+    #     near = 2.
+    #     far = 6.
 
-        if args.white_bkgd:
-            images = images[...,:3]*images[...,-1:] + (1.-images[...,-1:])
-        else:
-            images = images[...,:3]
+    #     if args.white_bkgd:
+    #         images = images[...,:3]*images[...,-1:] + (1.-images[...,-1:])
+    #     else:
+    #         images = images[...,:3]
 
-    elif args.dataset_type == 'LINEMOD':
-        images, poses, render_poses, hwf, K, i_split, near, far = load_LINEMOD_data(args.datadir, args.half_res, args.testskip)
-        print(f'Loaded LINEMOD, images shape: {images.shape}, hwf: {hwf}, K: {K}')
-        print(f'[CHECK HERE] near: {near}, far: {far}.')
-        i_train, i_val, i_test = i_split
+    # elif args.dataset_type == 'LINEMOD':
+    #     images, poses, render_poses, hwf, K, i_split, near, far = load_LINEMOD_data(args.datadir, args.half_res, args.testskip)
+    #     print(f'Loaded LINEMOD, images shape: {images.shape}, hwf: {hwf}, K: {K}')
+    #     print(f'[CHECK HERE] near: {near}, far: {far}.')
+    #     i_train, i_val, i_test = i_split
 
-        if args.white_bkgd:
-            images = images[...,:3]*images[...,-1:] + (1.-images[...,-1:])
-        else:
-            images = images[...,:3]
+    #     if args.white_bkgd:
+    #         images = images[...,:3]*images[...,-1:] + (1.-images[...,-1:])
+    #     else:
+    #         images = images[...,:3]
 
-    elif args.dataset_type == 'deepvoxels':
+    # elif args.dataset_type == 'deepvoxels':
 
-        images, poses, render_poses, hwf, i_split = load_dv_data(scene=args.shape,
-                                                                 basedir=args.datadir,
-                                                                 testskip=args.testskip)
+    #     images, poses, render_poses, hwf, i_split = load_dv_data(scene=args.shape,
+    #                                                              basedir=args.datadir,
+    #                                                              testskip=args.testskip)
 
-        print('Loaded deepvoxels', images.shape, render_poses.shape, hwf, args.datadir)
-        i_train, i_val, i_test = i_split
+    #     print('Loaded deepvoxels', images.shape, render_poses.shape, hwf, args.datadir)
+    #     i_train, i_val, i_test = i_split
 
-        hemi_R = np.mean(np.linalg.norm(poses[:,:3,-1], axis=-1))
-        near = hemi_R-1.
-        far = hemi_R+1.
+    #     hemi_R = np.mean(np.linalg.norm(poses[:,:3,-1], axis=-1))
+    #     near = hemi_R-1.
+    #     far = hemi_R+1.
 
     else:
         print('Unknown dataset type', args.dataset_type, 'exiting')
