@@ -56,12 +56,19 @@ example for camera of room
 # Execution
 input : few images
 
-<img width="300" height="160" src="./data/room/0001.jpg"></img>
-<img width="300" height="160" src="./data/room/0020.jpg"></img>
-<img width="300" height="160" src="./data/room/0027.jpg"></img>
+<img width="300" height="160" src="./data/room/images/0001.jpg"></img>
+<img width="300" height="160" src="./data/room/images/0020.jpg"></img>
+<img width="300" height="160" src="./data/room/images/0027.jpg"></img>
  ...
 
 output : trained_example.mp4
+
+interactive **openGL** viewer
+
+Render with CUDA [reference](https://github.com/Fyusion/LLFF#3-render-novel-views)
+```
+./cuda_renderer mpidir <your_posefile> <your_videofile> height crop crf
+```
 
 https://github.com/sabin5105/REAL/assets/50198431/e3ce1e64-8531-4430-9007-4fa3ce72cab7
 
@@ -101,3 +108,15 @@ https://github.com/sabin5105/REAL/assets/50198431/e3ce1e64-8531-4430-9007-4fa3ce
 * [ ] train more to make it more realistic
 * [ ] build configuration
 * [ ] modify the whole thing to easy to use at any data with single command
+
+# Citation
+```
+@misc{lin2020nerfpytorch,
+  title={NeRF-pytorch},
+  author={Yen-Chen, Lin},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished={\url{https://github.com/yenchenlin/nerf-pytorch/}},
+  year={2020}
+}
+```
