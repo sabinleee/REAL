@@ -46,6 +46,10 @@ example for transformation
 `./{data}/text`
 
 example for camera of room
+
+The camera parameters : 
+
+focal length x, y /  principal point x, y / radial distortion coefficients k1~k4  / tangential distortion coefficients p1, p2.
 ```
 # Camera list with one line of data per camera:
 #   CAMERA_ID, MODEL, WIDTH, HEIGHT, PARAMS[]
@@ -54,6 +58,10 @@ example for camera of room
 ```
 
 Image list
+
+Q: quaternion which rotates a point from the world coordinate system into the camera coordinate system.
+
+T: translation of the camera center in world coordinates.
 ```
 IMAGE_ID, QW, QX, QY, QZ, TX, TY, TZ, CAMERA_ID, NAME
 POINTS2D[] as (X, Y, POINT3D_ID)
@@ -70,8 +78,6 @@ Number of images: 35, mean observations per image: 1618.6571428571428
 944 5.1531701493470319 6.0687577564030635 5.0653561052108316 112 100 78 0.78653193433340196 32 2166 18 888 33 1394 27 1595
 ...
 ```
-
-
 
 
 # Execution
@@ -91,8 +97,6 @@ Render with CUDA : [reference](https://github.com/Fyusion/LLFF#3-render-novel-vi
 ```
 ./cuda_renderer mpidir <your_posefile> <your_videofile> height crop crf
 ```
-
-<hr>
 
 trained_example.mp4
 
