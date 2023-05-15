@@ -61,14 +61,19 @@ input : few images
 <img width="300" height="160" src="./data/room/images/0027.jpg"></img>
  ...
 
-output : trained_example.mp4
+<hr>
 
+output :
 interactive **openGL** viewer
 
-Render with CUDA [reference](https://github.com/Fyusion/LLFF#3-render-novel-views)
+Render with CUDA : [reference](https://github.com/Fyusion/LLFF#3-render-novel-views)
 ```
 ./cuda_renderer mpidir <your_posefile> <your_videofile> height crop crf
 ```
+
+<hr>
+
+trained_example.mp4
 
 https://github.com/sabin5105/REAL/assets/50198431/e3ce1e64-8531-4430-9007-4fa3ce72cab7
 
@@ -118,5 +123,13 @@ https://github.com/sabin5105/REAL/assets/50198431/e3ce1e64-8531-4430-9007-4fa3ce
   journal = {GitHub repository},
   howpublished={\url{https://github.com/yenchenlin/nerf-pytorch/}},
   year={2020}
+}
+```
+```
+@article{mildenhall2019llff,
+  title={Local Light Field Fusion: Practical View Synthesis with Prescriptive Sampling Guidelines},
+  author={Ben Mildenhall and Pratul P. Srinivasan and Rodrigo Ortiz-Cayon and Nima Khademi Kalantari and Ravi Ramamoorthi and Ren Ng and Abhishek Kar},
+  journal={ACM Transactions on Graphics (TOG)},
+  year={2019},
 }
 ```
