@@ -81,7 +81,7 @@ Number of images: 35, mean observations per image: 1618.6571428571428
 
 
 # Execution
-input : few images
+input : few images, camera pose, camera parameters with llff data format
 
 <img width="300" height="160" src="./data/room/images/0001.jpg"></img>
 <img width="300" height="160" src="./data/room/images/0020.jpg"></img>
