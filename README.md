@@ -1,5 +1,6 @@
-# REAL 
-REAL: Render Real Estate 2D images into 3D scene with NeRF
+# REAL
+
+This repository focuses on rendering real estate 2D images into a 3D scene using NeRF (Neural Radiance Fields), a technique for synthesizing novel views of a scene from a set of images. It is primarily inspired by NeRF and references the following papers:
 
 Mainly inspired by NeRF
 * [Main Reference](https://www.matthewtancik.com/nerf)
@@ -12,13 +13,16 @@ Mainly inspired by NeRF
 
 # LLFF data - Format
 
+LLFF can correct certain types of distortion in the input images, such as lens distortion and chromatic aberration, by estimating the intrinsic camera parameters of each image.
+
+By estimating and correcting the intrinsic camera parameters, LLFF can enhance the quality of the images by reducing or eliminating the effects of distortion. This correction process can result in improved image sharpness, reduced color fringing, and a more accurate representation of the captured scene.
+
+* images/ ---- .---
 * sparse/ ---- .bin
 * bound_poses.npy or transforms.json, {yourdata}.txt
 * check [**LLFF Repository**](https://github.com/Fyusion/LLFF) first!!
 
-* LLFF can correct certain types of distortion in the input images, such as lens distortion and chromatic aberration, by estimating the intrinsic camera parameters of each image.
-
-example for transformation
+### example for transformation
 ```
 "camera_angle_x": 1.6316266081598993,
 "camera_angle_y": 1.0768185778803099,
@@ -42,14 +46,19 @@ example for transformation
    ...
 ```
 
+An example transformation is provided, demonstrating camera parameters like camera angle, focal length, distortion coefficients, principal point, image dimensions, and more.
+
 # Camera pose
 `./{data}/text`
 
-example for camera of room
+### example for camera of room
 
-The camera parameters : 
+These parameters define how the camera lens captures and distorts the incoming light rays. In the provided example, the focal length, principal point, and distortion coefficients are specified for a single camera.
+
+### The camera parameters
 
 focal length x, y /  principal point x, y / radial distortion coefficients k1~k4  / tangential distortion coefficients p1, p2.
+
 ```
 # Camera list with one line of data per camera:
 #   CAMERA_ID, MODEL, WIDTH, HEIGHT, PARAMS[]
@@ -57,11 +66,14 @@ focal length x, y /  principal point x, y / radial distortion coefficients k1~k4
 1 OPENCV 1920 1080 903.30969148199449 904.11462208964554 959.57385416570162 544.09077295198631 -0.0006951346026472416 -0.0022074727073696896 -0.00018190630274219532 -0.00015686925639183075
 ```
 
-Image list
+### Image list
+
+These parameters represent the orientation and position of the camera in the world coordinate system. Additionally, each image may have multiple observations (POINTS2D) of 3D points in the scene, defined by their X and Y coordinates and the corresponding POINT3D_ID.
 
 Q: quaternion which rotates a point from the world coordinate system into the camera coordinate system.
 
 T: translation of the camera center in world coordinates.
+
 ```
 IMAGE_ID, QW, QX, QY, QZ, TX, TY, TZ, CAMERA_ID, NAME
 POINTS2D[] as (X, Y, POINT3D_ID)
@@ -70,7 +82,7 @@ Number of images: 35, mean observations per image: 1618.6571428571428
 ...
 ```
 
-3D points for room
+### 3D points for room
 ```
 # 3D point list with one line of data per point:
 #   POINT3D_ID, X, Y, Z, R, G, B, ERROR, TRACK[] as (IMAGE_ID, POINT2D_IDX)
@@ -79,9 +91,9 @@ Number of images: 35, mean observations per image: 1618.6571428571428
 ...
 ```
 
-
 # Execution
-input : few images, camera pose, camera parameters with llff data format
+### input : 
+few images, camera pose, camera parameters with llff data format
 
 <img width="300" height="160" src="./data/room/images/0001.jpg"></img>
 <img width="300" height="160" src="./data/room/images/0020.jpg"></img>
@@ -90,7 +102,7 @@ input : few images, camera pose, camera parameters with llff data format
 
 <hr>
 
-output :
+### output :
 interactive **openGL** viewer
 
 Render with CUDA : [reference](https://github.com/Fyusion/LLFF#3-render-novel-views)
@@ -117,17 +129,17 @@ https://github.com/sabin5105/REAL/assets/50198431/e3ce1e64-8531-4430-9007-4fa3ce
    *  <img src="./img/weighted_sum.png" width="500" height="120"></img>
 
 3. Stratified Sampling approach
-
+   * capture the details of the scene
    * <img src="./img/stratified_sampling.png" width="300" height="50"></img>
 
    * <img src="./img/nerf_non_continuous.png" width="350px"></img>
 
 4. Hierarchical Volume Sampling - Coarse network -> Fine network
-
+   * starting with a coarse network and gradually refining the results using a fine network.
    * <img src="./img/volume_sampling.png" width="400" height="150"></img>
 
 5. Positional Encoding
-
+   * applied to the input to incorporate spatial information into the network.
    * <img src="./img/positional_embedding.png" width="400" height="30"></img>
 
    * <img src="./img/layers.png" width="400"></img>
