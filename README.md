@@ -1,6 +1,6 @@
 # REAL
 
-This repository focuses on rendering real estate 2D images into a 3D scene using NeRF (Neural Radiance Fields), a technique for synthesizing novel views of a scene from a set of images. It is primarily inspired by NeRF and references the following papers:
+This repository focuses on rendering real estate room of 2D images into a 3D scene using NeRF (Neural Radiance Fields), a technique for synthesizing novel views of a scene from a set of images. It is primarily inspired by NeRF and references the following papers:
 
 Mainly inspired by NeRF
 * [Main Reference](https://www.matthewtancik.com/nerf)
@@ -10,6 +10,33 @@ Mainly inspired by NeRF
 * [Neural Radiance Fields for Unconstrained Photo Collections](https://arxiv.org/abs/2008.02268)
 
 <img width="600" height="200" src="./img/nerf.png"></img>
+
+# Contents
+- [REAL](#real)
+- [Contents](#contents)
+- [Requirements](#requirements)
+- [LLFF data - Format](#llff-data---format)
+    - [example for transformation](#example-for-transformation)
+- [Camera pose](#camera-pose)
+    - [example for camera of room](#example-for-camera-of-room)
+    - [The camera parameters](#the-camera-parameters)
+    - [Image list](#image-list)
+    - [3D points for room](#3d-points-for-room)
+- [Execution](#execution)
+    - [input :](#input-)
+    - [output :](#output-)
+- [Training Sequence](#training-sequence)
+- [Improvement](#improvement)
+- [Citation](#citation)
+
+# Requirements
+For this project to render the images until now, you need to get the LLFF data format.
+At the beginning, planed to convert it without any other special data format, but it is not easy to convert it.
+Therefore, It is not possible if you don't have the LLFF data format which describes the camera pose and 3D points of the room and transformation of the camera parameters.
+
+By the way, I will try to convert it to the LLFF data format automatically within a single command option(instruction) or somthing like that in the future.
+
+The breif description about LLFF data is below.
 
 # LLFF data - Format
 
@@ -92,8 +119,14 @@ Number of images: 35, mean observations per image: 1618.6571428571428
 ```
 
 # Execution
+You can find the sample data in the `./data` directory.
+It contains some images that I took in my room and the camera pose and parameters of the room got following the structure of the LLFF.
+
+Also you can get the whole training code in the `./train` directory which is based on [nerf](https://github.com/yenchenlin/nerf-pytorch).
+Modified the code a little bit to train only with the LLFF data format and to render the images with CUDA using OpenGL.
+
 ### input : 
-few images, camera pose, camera parameters with llff data format
+few images, camera pose, camera parameters with LLFF data format
 
 <img width="300" height="160" src="./data/room/images/0001.jpg"></img>
 <img width="300" height="160" src="./data/room/images/0020.jpg"></img>
@@ -104,6 +137,9 @@ few images, camera pose, camera parameters with llff data format
 
 ### output :
 interactive **openGL** viewer
+
+OpenGL is a cross-platform graphics API that specifies a standard software interface for 3D graphics processing hardware which is possible to control the camera position and viewing direction interactively.
+I used OpenGL to render the images with CUDA. because it is fast and easy to use. futhermore, there's reference code for rendering with OpenGL in the LLFF repository.
 
 Render with CUDA : [reference](https://github.com/Fyusion/LLFF#3-render-novel-views)
 ```
@@ -145,7 +181,7 @@ https://github.com/sabin5105/REAL/assets/50198431/e3ce1e64-8531-4430-9007-4fa3ce
    * <img src="./img/layers.png" width="400"></img>
 
 # Improvement
-* [ ] Fix positional encoding issue
+* [ ] Fix positional encoding issue - Possibly the reason why the result is not good
 * [ ] Add more data
 * [ ] autoamtically make llff data
 * [ ] train more to make it more realistic
