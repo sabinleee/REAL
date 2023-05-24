@@ -28,6 +28,7 @@ Mainly inspired by NeRF
 - [Training Sequence](#training-sequence)
 - [Improvement](#improvement)
 - [Citation](#citation)
+- [License](#license)
 
 # Requirements
 For this project to render the images until now, you need to get the LLFF data format.
@@ -207,3 +208,6 @@ https://github.com/sabin5105/REAL/assets/50198431/e3ce1e64-8531-4430-9007-4fa3ce
   year={2019},
 }
 ```
+
+# License
+MIT License - see [`LICENSE`](LICENSE) for more details.
