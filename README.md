@@ -145,6 +145,7 @@ https://github.com/sabin5105/REAL/assets/50198431/e3ce1e64-8531-4430-9007-4fa3ce
    * <img src="./img/layers.png" width="400"></img>
 
 # Improvement
+* [ ] Fix positional encoding issue
 * [ ] Add more data
 * [ ] autoamtically make llff data
 * [ ] train more to make it more realistic
